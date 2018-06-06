@@ -3,7 +3,6 @@ import lxml
 import re
 import nltk
 import os
-import logging
 from bs4 import BeautifulSoup
 from nltk.corpus import PlaintextCorpusReader
 
@@ -115,10 +114,9 @@ def getHighFreqWords():
             num = str(item[1])
             while len(num) < maxlen1:
                 num = ' ' + num
-            file.write(word0 + ' ' + num + ' ')
+            file.write(word0 + ' ' + num + '  ')
             for translate in q:
-                if "人名" not in translate:
-                    file.write(translate + ' ')
+                file.write(translate + ' ')
             file.write("\n")
 
 
@@ -127,8 +125,8 @@ if __name__ == '__main__':
         os.remove("temp.txt")
     print("root url is "+rootUrl + "\n")
 
-    print("getting links...")
     # step 1
+    print("getting links...")
     getLinks(rootUrl)
 
     # step 2
@@ -140,6 +138,6 @@ if __name__ == '__main__':
             except Exception as e:
                 print(e)
 
-    print("getting high frequency words...")
     # step 3
+    print("getting high frequency words...")
     getHighFreqWords()
